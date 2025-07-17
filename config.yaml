@@ -1,6 +1,6 @@
 name: "TRMNL UI"
 description: "Custom TRMNL UI for Home Assistant"
-version: "0.0.14"
+version: "0.0.27"
 slug: "trmnl_ui"
 init: false
 arch:

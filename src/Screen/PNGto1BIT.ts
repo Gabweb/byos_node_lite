@@ -121,8 +121,8 @@ export async function PNGto1BIT(image: Buffer) {
                 const gray = grayscale[idx];
 
                 // Determine pixel value with optimized logic
-                let isBlack = gray < BLACK_TRESHOLD
-                /*let isBlack = false;
+                //let isBlack = gray < BLACK_TRESHOLD
+                let isBlack = false;
 
                 if (gray < 10) {
                     // Pure black pixel
@@ -137,7 +137,10 @@ export async function PNGto1BIT(image: Buffer) {
                     // Not on an edge (likely in an image) - use dithered result
                     const ditheredValue = dithered[idx];
                     isBlack = ditheredValue < 128; // Values are either 0 or 255
-                }*/
+                }
+
+                // Quick fix for black threshold
+                isBlack = gray < BLACK_TRESHOLD
 
                 // Set the bit in the byte if black using bit operations
                 if (isBlack) {
