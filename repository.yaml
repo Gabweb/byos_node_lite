@@ -1,0 +1,4 @@
+# https://developers.home-assistant.io/docs/add-ons/repository#repository-configuration
+name: Custom TRMNL UI
+url: 'https://github.com/Gabweb/byos_node_lite'
+maintainer: Gabweb

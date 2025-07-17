@@ -1,0 +1,34 @@
+name: "TRMNL UI"
+description: "Custom TRMNL UI for Home Assistant"
+version: "0.0.14"
+slug: "trmnl_ui"
+init: false
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+startup: application
+boot: auto
+ingress: true
+ingress_port: 3000
+ports:
+  3000/tcp: 3000
+webui: 'http://[HOST]:[PORT:3000]'
+options:
+  HOMEASSISTANT_URL: 'http://homeassistant.local:8123'
+  HOMEASSISTANT_TOKEN: ''
+  SECRET_KEY: ''
+  PUBLIC_URL_ORIGIN: 'http://homeassistant.local:3000'
+  WEATHER_ENTITY_ID: 'weather.abc'
+  OUTDOOR_TEMP_ENTITY_ID: 'sensor.abc'
+  BLACK_TRESHOLD: 180
+schema:
+  HOMEASSISTANT_URL: str
+  HOMEASSISTANT_TOKEN: password
+  SECRET_KEY: password
+  PUBLIC_URL_ORIGIN: str
+  WEATHER_ENTITY_ID: str
+  OUTDOOR_TEMP_ENTITY_ID: str
+  BLACK_TRESHOLD: int

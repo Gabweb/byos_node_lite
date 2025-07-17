@@ -1,4 +1,5 @@
-import {Jimp} from "jimp";
+import { BLACK_TRESHOLD } from "Config.js";
+import { Jimp } from "jimp";
 
 
 export async function PNGto1BIT(image: Buffer) {
@@ -61,7 +62,7 @@ export async function PNGto1BIT(image: Buffer) {
     }
 
     // Step 4: Apply dithering method
-    const dithered = atkinsonDithering(grayscale, targetWidth, targetHeight, false);
+    const dithered = grayscale // atkinsonDithering(grayscale, targetWidth, targetHeight, false);
 
     // BMP file header (14 bytes) + Info header (40 bytes)
     const fileHeaderSize = 14;
@@ -120,7 +121,8 @@ export async function PNGto1BIT(image: Buffer) {
                 const gray = grayscale[idx];
 
                 // Determine pixel value with optimized logic
-                let isBlack = false;
+                let isBlack = gray < BLACK_TRESHOLD
+                /*let isBlack = false;
 
                 if (gray < 10) {
                     // Pure black pixel
@@ -135,7 +137,7 @@ export async function PNGto1BIT(image: Buffer) {
                     // Not on an edge (likely in an image) - use dithered result
                     const ditheredValue = dithered[idx];
                     isBlack = ditheredValue < 128; // Values are either 0 or 255
-                }
+                }*/
 
                 // Set the bit in the byte if black using bit operations
                 if (isBlack) {

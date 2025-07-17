@@ -1,7 +1,7 @@
 {
   "name": "byos_node_lite",
   "scripts": {
-    "start": "tsx --env-file=.env.local src/Main.ts",
+    "start": "tsx src/Main.ts",
     "watch": "tsx watch --env-file=.env.local src/Main.ts",
     "test": "tsc && vitest run"
   },
@@ -10,7 +10,7 @@
     "express": "^5.1.0",
     "jimp": "^1.6.0",
     "liquidjs": "^10.21.1",
-    "puppeteer": "^24.9.0",
+    "puppeteer": "^24.14.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tsx": "^4.19.4"
@@ -22,6 +22,7 @@
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
     "@types/supertest": "^6.0.3",
+    "ky": "^1.8.1",
     "supertest": "^7.1.1",
     "typescript": "^5.8.3",
     "vite-tsconfig-paths": "^5.1.4",
