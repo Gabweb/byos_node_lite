@@ -65,3 +65,11 @@ export type Weather = State<{
     friendly_name: string;
     supported_features: number;
 }>
+
+export interface CalendarEntry {
+    start: { date: string };
+    end: { date: string };
+    summary: string;
+    uid: string;
+}
+

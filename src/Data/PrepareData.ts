@@ -1,6 +1,7 @@
-import { OUTDOOR_TEMP_ENTITY_ID, TIMEZONE, WEATHER_ENTITY_ID } from "Config.js";
-import { callService, getForecasts, getState } from "./HomeassistantClient.js";
-import { Forecast, SensoreState, Weather } from "./HomeassistantModels.js";
+import { GARBAGE_CAL_ENTITY_ID, OUTDOOR_TEMP_ENTITY_ID, TIMEZONE, WEATHER_ENTITY_ID } from "Config.js";
+import { callService, getCalendar, getForecasts, getState } from "./HomeassistantClient.js";
+import { CalendarEntry, Forecast, SensoreState, Weather } from "./HomeassistantModels.js";
+import { GarbageDates, getNextGarbageDates } from "./GarbageDates.js";
 
 export type TemplateDataType = {
     time: string
@@ -8,6 +9,7 @@ export type TemplateDataType = {
     forecastsHourly: Forecast[]
     forecastsDaily: Forecast[]
     outdoorTemperature: string
+    garbage: GarbageDates
 }
 
 export async function prepareData(): Promise<TemplateDataType> {
@@ -19,14 +21,16 @@ export async function prepareData(): Promise<TemplateDataType> {
     const outdoorTemperature$ = getState<SensoreState>(OUTDOOR_TEMP_ENTITY_ID);
     const forecastsHourly$ = getForecasts(WEATHER_ENTITY_ID, 'hourly');
     const forecastsDaily$ = getForecasts(WEATHER_ENTITY_ID, 'daily');
+    const garbageCal$ = getCalendar(GARBAGE_CAL_ENTITY_ID, new Date(), new Date(new Date().setDate(new Date().getDate() + 30)));
 
-    //console.log((await forecastsDaily$)[0].)
+    console.log((await garbageCal$))
 
     return {
         time,
         weather: await weather$,
         forecastsHourly: await forecastsHourly$,
         forecastsDaily: await forecastsDaily$,
-        outdoorTemperature: (await outdoorTemperature$).state
+        outdoorTemperature: (await outdoorTemperature$).state,
+        garbage: getNextGarbageDates(await garbageCal$)
     }
 }

@@ -1,6 +1,9 @@
 import { TemplateDataType } from "Data/PrepareData.js";
 import TitleBar from "./TitleBar.js";
 import Weather from "./WeatherView.js";
+import { getLocalDate } from "Template/Util/DateUtil.js";
+import { LOCAL, TIMEZONE } from "Config.js";
+import GarbageView from "./Garbage.js";
 
 export default function App(data: TemplateDataType) {
     return <div style={{
@@ -14,10 +17,8 @@ export default function App(data: TemplateDataType) {
             <div className="view view--full">
                 <div className="layout layout--col layout--left layout--stretch-x layout--top gap--large">
                     <Weather data={data} />
-                    <div className="grid gap--large">
-                        <div className="row">
-                            <div className="item">Hi</div>
-                        </div>
+                    <div className="flex flex--row">
+                        <GarbageView garbage={data.garbage} />
                     </div>
                 </div>
 

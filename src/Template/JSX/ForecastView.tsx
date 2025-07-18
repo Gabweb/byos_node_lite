@@ -1,6 +1,6 @@
 import { Forecast } from "Data/HomeassistantModels.js";
 import IconText from "./Widgets/IconText.js";
-import { LOCAL, TIMEZONE } from "Config.js";
+import { getLocalDate, getLocalTime } from "Template/Util/DateUtil.js";
 
 
 function getConditionIconClass(condition: string) {
@@ -42,29 +42,6 @@ function getWeatherDetail(forecast: Forecast): [string, string] {
         text = forecast.precipitation + "mm";
     }
     return [icon, text]
-}
-
-function getLocalTime(inputDate: string): string {
-    return new Date(inputDate)
-        .toLocaleTimeString(LOCAL, { hour: "2-digit", minute: "2-digit", timeZone: TIMEZONE });
-}
-
-function getLocalDate(inputDate: string): string {
-    const todayDate = new Date();
-    const tomorrowDate = new Date();
-    tomorrowDate.setDate(todayDate.getDate() + 1);
-
-    const today = todayDate.toLocaleDateString(LOCAL, { weekday: "long", timeZone: TIMEZONE });
-    const tomorrow = tomorrowDate.toLocaleDateString(LOCAL, { weekday: "long", timeZone: TIMEZONE });
-    const result = new Date(inputDate).toLocaleDateString(LOCAL, { weekday: "long", timeZone: TIMEZONE });
-
-    if (result === today) {
-        return "Heute";
-    }
-    if (result === tomorrow) {
-        return "Morgen";
-    }
-    return result;
 }
 
 function getTitle(forecast: Forecast, hourly: boolean): string {

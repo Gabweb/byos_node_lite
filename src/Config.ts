@@ -21,7 +21,7 @@ export const BLACK_TRESHOLD = parseInt(readEnvOrFail('BLACK_TRESHOLD'), 10)
 
 export const WEATHER_ENTITY_ID = readEnvOrFail('WEATHER_ENTITY_ID')
 export const OUTDOOR_TEMP_ENTITY_ID = readEnvOrFail('OUTDOOR_TEMP_ENTITY_ID')
-
+export const GARBAGE_CAL_ENTITY_ID = readEnvOrFail('GARBAGE_CAL_ENTITY_ID')
 
 
 export const IS_TEST_ENV = mayReadEnv('TEST') === 'true';

@@ -1,6 +1,6 @@
 import { HOMEASSISTANT_TOKEN, HOMEASSISTANT_URL } from "Config.js";
 import ky from "ky";
-import { Forecast, Forecasts } from "./HomeassistantModels.js";
+import { CalendarEntry, Forecast, Forecasts } from "./HomeassistantModels.js";
 
 const api = ky.extend({
     hooks: {
@@ -31,4 +31,8 @@ export function callService<T = unknown>(domain: string, service: string, json: 
 export async function getForecasts(entityId: string, type: 'hourly' | 'daily'): Promise<Forecast[]> {
     const result = await callService<Forecasts>('weather', 'get_forecasts', { entity_id: entityId, type });
     return result.service_response[entityId].forecast;
+}
+
+export function getCalendar(entityId: string, start: Date, end: Date): Promise<CalendarEntry[]> {
+    return api.get(`${HOMEASSISTANT_URL}/api/calendars/${entityId}?start=${start.toISOString()}&end=${end.toISOString()}`).json()
 }
