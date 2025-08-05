@@ -1,6 +1,6 @@
 name: "TRMNL UI"
 description: "Custom TRMNL UI for Home Assistant"
-version: "0.0.28"
+version: "0.1.0"
 slug: "trmnl_ui"
 init: false
 arch:
@@ -24,7 +24,6 @@ options:
   WEATHER_ENTITY_ID: 'weather.abc'
   OUTDOOR_TEMP_ENTITY_ID: 'sensor.abc'
   GARBAGE_CAL_ENTITY_ID: 'calendar.abc'
-  BLACK_TRESHOLD: 180
 schema:
   HOMEASSISTANT_URL: str
   HOMEASSISTANT_TOKEN: password
@@ -33,4 +32,3 @@ schema:
   WEATHER_ENTITY_ID: str
   OUTDOOR_TEMP_ENTITY_ID: str
   GARBAGE_CAL_ENTITY_ID: str
-  BLACK_TRESHOLD: int

@@ -1,4 +1,4 @@
-import express, {NextFunction, Request, Response} from "express";
+import express, { NextFunction, Request, Response } from "express";
 import {
     SECRET_KEY,
     SERVER_HOST,
@@ -7,10 +7,10 @@ import {
     REFRESH_RATE_SECONDS,
     SCREEN_URL, IS_TEST_ENV
 } from "Config.js";
-import {buildScreen, checkImageUrl, getScreenHash} from "Screen/Screen.js";
-import {BYOSRoutes} from "BYOS/BYOSRoutes.js";
-import {ROUTE_IMAGE, ROUTE_PLUGIN_REDIRECT} from "Routes.js";
-import {initPuppeteer} from "./Screen/RenderHTML.js";
+import { buildScreen, checkImageUrl, getScreenHash } from "Screen/Screen.js";
+import { BYOSRoutes } from "BYOS/BYOSRoutes.js";
+import { ROUTE_IMAGE, ROUTE_PLUGIN_REDIRECT } from "Routes.js";
+import { initPuppeteer } from "./Screen/RenderHTML.js";
 
 export const app = express();
 app.use(express.json());
@@ -49,18 +49,18 @@ app.get(ROUTE_IMAGE, async (req: Request, res: Response) => {
         return;
     }
     const image1bit = await buildScreen();
-    res.setHeader('Content-Type', 'image/bmp');
+    res.setHeader('Content-Type', 'image/png');
     res.send(image1bit);
 })
 
 app.use((req: Request, res: Response) => {
     console.log(`[404] ${req.method} ${req.url}`);
-    res.status(404).json({error: 'Not Found', message: 'The requested path could not be found: ' + req.url});
+    res.status(404).json({ error: 'Not Found', message: 'The requested path could not be found: ' + req.url });
 });
 
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
     console.error(err.stack);
-    res.status(500).json({error: 'Internal Server Error', message: 'Something went wrong!'});
+    res.status(500).json({ error: 'Internal Server Error', message: 'Something went wrong!' });
 });
 
 if (!IS_TEST_ENV) {

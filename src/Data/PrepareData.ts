@@ -23,8 +23,6 @@ export async function prepareData(): Promise<TemplateDataType> {
     const forecastsDaily$ = getForecasts(WEATHER_ENTITY_ID, 'daily');
     const garbageCal$ = getCalendar(GARBAGE_CAL_ENTITY_ID, new Date(), new Date(new Date().setDate(new Date().getDate() + 30)));
 
-    console.log((await garbageCal$))
-
     return {
         time,
         weather: await weather$,

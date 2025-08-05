@@ -17,7 +17,6 @@ export const SECRET_KEY = readEnvOrFail('SECRET_KEY');
 export const PUBLIC_URL_ORIGIN = readEnvOrFail('PUBLIC_URL_ORIGIN');
 export const HOMEASSISTANT_URL = readEnvOrFail('HOMEASSISTANT_URL')
 export const HOMEASSISTANT_TOKEN = readEnvOrFail('HOMEASSISTANT_TOKEN')
-export const BLACK_TRESHOLD = parseInt(readEnvOrFail('BLACK_TRESHOLD'), 10)
 
 export const WEATHER_ENTITY_ID = readEnvOrFail('WEATHER_ENTITY_ID')
 export const OUTDOOR_TEMP_ENTITY_ID = readEnvOrFail('OUTDOOR_TEMP_ENTITY_ID')

@@ -1,5 +1,5 @@
 import { prepareData, TemplateDataType } from "Data/PrepareData.js";
-import { PNGto1BIT } from "./PNGto1BIT.js";
+import { to2BitPng } from "./PNGto1BIT.js";
 import { TEMPLATE_FOLDER } from "Config.js";
 import App from "Template/JSX/App.js";
 import { renderToImage } from "./RenderHTML.js";
@@ -13,7 +13,7 @@ export async function buildScreen() {
     const templateData = await prepareData();
     const html = await buildJSX(App, templateData);
     const image = await renderToImage(headerHtml + html);
-    return PNGto1BIT(image);
+    return to2BitPng(image);
 }
 
 export async function getScreenHash() {

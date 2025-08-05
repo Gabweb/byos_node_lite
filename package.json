@@ -13,7 +13,8 @@
     "puppeteer": "^24.14.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tsx": "^4.19.4"
+    "tsx": "^4.19.4",
+    "upng-js": "^2.1.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.1",
@@ -22,6 +23,7 @@
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
     "@types/supertest": "^6.0.3",
+    "@types/upng-js": "^2.1.5",
     "ky": "^1.8.1",
     "supertest": "^7.1.1",
     "typescript": "^5.8.3",
