@@ -1,6 +1,42 @@
 import { BLACK_TRESHOLD } from "Config.js";
 import { Jimp } from "jimp";
 
+export async function PNGto2BIT_new(image: Buffer): Promise<Buffer> {
+    const palette = [0x00, 0x55, 0xaa, 0xff]; // 4 grayscale levels
+
+    // Load image and convert to grayscale
+    const jimpImage = await Jimp.read(image);
+    jimpImage.resize({ h: 480, w: 800 });
+    jimpImage.greyscale();
+
+    // Create array for Floyd-Steinberg dithering
+    const width = jimpImage.bitmap.width;
+    const height = jimpImage.bitmap.height;
+    const pixels = new Float32Array(width * height);
+
+    // Convert to floating-point array for dithering
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            const idx = (y * width + x);
+            pixels[idx] = jimpImage.bitmap.data[idx * 4];
+        }
+    }
+
+    // Write back to image
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            const idx = y * width + x;
+            const value = Math.max(0, Math.min(255, Math.round(pixels[idx])));
+            const offset = (idx * 4);
+            jimpImage.bitmap.data[offset] = value;
+            jimpImage.bitmap.data[offset + 1] = value;
+            jimpImage.bitmap.data[offset + 2] = value;
+            // Keep alpha as is
+        }
+    }
+
+    return await jimpImage.getBuffer("image/png");
+}
 
 export async function PNGto1BIT(image: Buffer) {
     // Convert to grayscale
